@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Die-Vers</string>
+    <string name="bottom_profile_text">Profile</string>
+    <string name="bottom_add_post_text">Add Post</string>
+    <string name="bottom_notifications_text">Notifications</string>
+    <string name="bottom_home_text">Home</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
