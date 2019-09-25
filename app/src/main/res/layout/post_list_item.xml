@@ -23,7 +23,9 @@
                 android:id="@+id/iv_post"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
+                android:src="@drawable/ic_home"
                 />
+            <!-- Test Foto -->
             <TextView
                 android:id="@+id/tv_post_title"
                 android:layout_width="wrap_content"
