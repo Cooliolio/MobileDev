@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "839976270441",
+    "firebase_url": "https://die-vers-7560b.firebaseio.com",
+    "project_id": "die-vers-7560b",
+    "storage_bucket": "die-vers-7560b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:839976270441:android:d4e4b666e34904c12180f8",
+        "android_client_info": {
+          "package_name": "com.MobDev.die_vers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "839976270441-2udselh406f3c1nhaoeg0757ui7b9738.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.MobDev.die_vers",
+            "certificate_hash": "574acabe66ba0e0e188ad5ce8b7c0bdeac1ba56c"
+          }
+        },
+        {
+          "client_id": "839976270441-3njpbhgddrodu03et5pcc3chl8jo3pon.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClvyyGYCBpvnMAMSiYXAK9Lg_AHikZioE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "839976270441-3njpbhgddrodu03et5pcc3chl8jo3pon.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

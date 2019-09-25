@@ -2,48 +2,47 @@ package com.MobDev.die_vers.ViewActivities;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
 
-import com.MobDev.die_vers.Adapters.PostListAdapter;
-import com.MobDev.die_vers.JSONArrayCursor;
+import com.MobDev.die_vers.Adapters.rvPostAdapter;
 import com.MobDev.die_vers.R;
 
-import org.json.JSONArray;
-import org.json.JSONException;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    //DEBUG
+    private static final String TAG = "MainActivity";
+
     //UI elements
     private BottomNavigationView bottomNavigationView;
-    private RecyclerView recyclerView;
-    private RecyclerView.Adapter mAdapter;
-    private Cursor mCursor;
 
-    private String sample_response = "[{\"postTitle\":test}]";
+    //RV
+    private String mTitle;
+    private String mDistance;
+    private String mPrice;
+    private ArrayList<String> mImages = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        recyclerView = (RecyclerView) findViewById(R.id.rv_posts);
+        Toast.makeText(MainActivity.this, "Firebase Connected", Toast.LENGTH_LONG).show();
+        initImagesBitmaps();
 
-        mCursor = getJSONCursor(sample_response);
-        mAdapter = new PostListAdapter(mCursor,this);
-        //Crashes HERE
-        //recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        //recyclerView.setAdapter(mAdapter);
 
-        //declaration by id
+
         bottomNavigationView = findViewById(R.id.main_nav);
-
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -78,19 +77,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-    private Cursor getJSONCursor(String sample_response) {
-        try{
-
-            JSONArray array = new JSONArray(sample_response);
-            return new JSONArrayCursor(array);
-        }catch (JSONException ex){
-            String exception = ex.getMessage();
-        }
-        return null;
-    }
-
     private void toActivity(Activity a) {
         startActivity(new Intent(this, a.getClass()));
+    }
+
+    private void initImagesBitmaps(){
+        Log.d(TAG,"InitImages");
+        mImages.add("https://picsum.photos/id/325/200/200");
+        mTitle = "test";
+        mDistance = "test";
+        mPrice = "test";
+        initRv();
+    }
+    private void initRv(){
+        Log.d(TAG,"InitRV");
+        RecyclerView recyclerView = findViewById(R.id.rv_posts);
+        rvPostAdapter adapter = new rvPostAdapter(mTitle,mDistance,mPrice,mImages,this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
     }
 }
