@@ -1,31 +1,59 @@
 package com.MobDev.die_vers.DomainClasses;
 
+import android.location.Location;
+
+import java.util.ArrayList;
 import java.util.Date;
 
-public class UserPost {
+public class Post {
 
     private int post_id;
+    private String post_title;
     private boolean priced; //true == prijs | false == prijs overeenkomen
     private double price;
     private double[] bets;
-    //private location;
+    private Location location;
     private int user_id; // Naam van poster and rating
     private Date post_date;
     private String post_description;
-    private String[] imageUrls;
+    private ArrayList<String> imageUrls; // KAN vervangen worden door STRING[]
 
-    public UserPost(int post_id, boolean priced, double price, double[] bets, int user_id, Date post_date, String post_description, String[] imageUrls) {
+    public Post(int post_id, String post_title, boolean priced, double price, double[] bets, Location location, int user_id, Date post_date, String post_description, ArrayList<String> imageUrls) {
         this.post_id = post_id;
+        this.post_title = post_title;
         this.priced = priced;
         this.price = price;
         this.bets = bets;
+        this.location = location;
         this.user_id = user_id;
         this.post_date = post_date;
         this.post_description = post_description;
         this.imageUrls = imageUrls;
     }
 
-    public UserPost() {
+    public Post(String post_title, double price, ArrayList<String> imageUrls) {
+        this.post_title = post_title;
+        this.price = price;
+        this.imageUrls = imageUrls;
+    }
+
+    public Post() {
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public String getPost_title() {
+        return post_title;
+    }
+
+    public void setPost_title(String post_title) {
+        this.post_title = post_title;
     }
 
     public double[] getBets() {
@@ -36,11 +64,11 @@ public class UserPost {
         this.bets = bets;
     }
 
-    public String[] getImageUrls() {
+    public ArrayList<String> getImageUrls() {
         return imageUrls;
     }
 
-    public void setImageUrls(String[] imageUrls) {
+    public void setImageUrls(ArrayList<String> imageUrls) {
         this.imageUrls = imageUrls;
     }
 
