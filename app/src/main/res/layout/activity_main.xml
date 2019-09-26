@@ -18,7 +18,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        />
+        >
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Welkom "
+            android:textSize="25sp"
+            ></TextView>
+        </android.support.v7.widget.Toolbar>
 
     <View
         android:id="@+id/view"

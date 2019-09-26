@@ -16,10 +16,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.MobDev.die_vers.Adapters.rvPostAdapter;
 import com.MobDev.die_vers.Calculators.DistanceCalculator;
 import com.MobDev.die_vers.DomainClasses.Post;
+import com.MobDev.die_vers.DomainClasses.User;
 import com.MobDev.die_vers.R;
 
 import java.util.ArrayList;
@@ -75,9 +77,12 @@ public class MainActivity extends AppCompatActivity {
         posts.add(new Post("test2", 0.2, new ArrayList<String>(Arrays.asList("https://picsum.photos/id/325/200/200","url2")), locatie1));
         posts.add(new Post("test3", 0.2, new ArrayList<String>(Arrays.asList("https://picsum.photos/id/325/200/200","url2")), locatie1));
         posts.add(new Post("test4", 0.2, new ArrayList<String>(Arrays.asList("https://picsum.photos/id/325/200/200","url2")), locatie1));
+        User user = new User(1,"Furkan");
         //MOCK DATA END
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        TextView tvName = findViewById(R.id.tv_name);
+        tvName.append(user.getName());
         //Distance products
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
