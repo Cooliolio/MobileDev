@@ -17,6 +17,7 @@ public class Post {
     private Date post_date;
     private String post_description;
     private ArrayList<String> imageUrls; // KAN vervangen worden door STRING[]
+    private double post_distance;
 
     public Post(int post_id, String post_title, boolean priced, double price, double[] bets, Location location, int user_id, Date post_date, String post_description, ArrayList<String> imageUrls) {
         this.post_id = post_id;
@@ -30,15 +31,25 @@ public class Post {
         this.post_description = post_description;
         this.imageUrls = imageUrls;
     }
-
-    public Post(String post_title, double price, ArrayList<String> imageUrls) {
+    public Post(String post_title, double price, ArrayList<String> imageUrls, Location location) {
         this.post_title = post_title;
         this.price = price;
         this.imageUrls = imageUrls;
+        this.location = location;
     }
-
     public Post() {
     }
+
+
+    public double getPost_distance() {
+        return post_distance;
+    }
+
+    public void setPost_distance(double post_distance) {
+        this.post_distance = post_distance;
+    }
+
+
 
     public Location getLocation() {
         return location;

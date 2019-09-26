@@ -15,12 +15,14 @@ import com.MobDev.die_vers.DomainClasses.Post;
 import com.MobDev.die_vers.R;
 import com.bumptech.glide.Glide;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class rvPostAdapter extends RecyclerView.Adapter<rvPostAdapter.ViewHolder>{
 
     private ArrayList<Post> posts;
     private Context mContext;
+    private static DecimalFormat df2 = new DecimalFormat("#.##");
 
     public rvPostAdapter(ArrayList<Post> posts, Context mContext) {
         this.posts = posts;
@@ -43,8 +45,8 @@ public class rvPostAdapter extends RecyclerView.Adapter<rvPostAdapter.ViewHolder
                 .into(viewHolder.postImage);
 
         viewHolder.postTitle.setText(posts.get(counter).getPost_title());
-        viewHolder.postPrice.setText(Double.toString(posts.get(counter).getPrice()));
-        viewHolder.postDistance.setText("Tijdelijk 20km"); //BEREKENING ALGORITME IN THE FUTURE
+        viewHolder.postPrice.setText(posts.get(counter).getPrice() + "EUR");
+        viewHolder.postDistance.setText(df2.format(posts.get(counter).getPost_distance()) + " KM"); //BEREKENING ALGORITME IN THE FUTURE
 
         viewHolder.parentLayout.setOnClickListener(new View.OnClickListener(){
             @Override

@@ -1,16 +1,16 @@
 package com.MobDev.die_vers.Calculators;
 
 
+import android.location.Location;
+
 public class DistanceCalculator {
     private static final int earthRadius = 6371;
-    public static float calculateDistance(double lat_1, double lon_1, double lat_2, double lon_2)
+    public static float calculateDistance(Location locationA, Location locationB)
     {
-        float lat1 = (float) lat_1;
-        float lat2 = (float) lat_2;
-        float lon1 = (float) lon_1;
-        float lon2 = (float) lon_2;
-
-
+        float lat1 = (float) locationA.getLatitude();
+        float lat2 = (float) locationB.getLatitude();
+        float lon1 = (float) locationA.getLongitude();
+        float lon2 = (float) locationB.getLongitude();
 
         float dLat = (float) Math.toRadians(lat2 - lat1);
         float dLon = (float) Math.toRadians(lon2 - lon1);

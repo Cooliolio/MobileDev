@@ -42,7 +42,12 @@ public class MainActivity extends AppCompatActivity {
     private final LocationListener locationListener = new LocationListener() {
         @Override
         public void onLocationChanged(final Location location) {
-            float kms =  calculator.calculateDistance(location.getLatitude(),location.getLongitude(),50.930691,5.332480);
+            int i = 0;
+            for (Post p: posts) {
+                posts.get(i).setPost_distance(calculator.calculateDistance(location, p.getLocation()));
+                i++;
+                initRv();
+            }
         }
         @Override
         public void onStatusChanged(String provider, int status, Bundle extras) {
@@ -62,20 +67,26 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //MOCK DATA START
+        Location locatie1 = new Location("gps");
+        locatie1.setLatitude(50.930691);
+        locatie1.setLongitude(5.332480);
+        posts.add(new Post("test1", 0.2, new ArrayList<String>(Arrays.asList("https://picsum.photos/id/325/200/200","url2")), locatie1));
+        posts.add(new Post("test2", 0.2, new ArrayList<String>(Arrays.asList("https://picsum.photos/id/325/200/200","url2")), locatie1));
+        posts.add(new Post("test3", 0.2, new ArrayList<String>(Arrays.asList("https://picsum.photos/id/325/200/200","url2")), locatie1));
+        posts.add(new Post("test4", 0.2, new ArrayList<String>(Arrays.asList("https://picsum.photos/id/325/200/200","url2")), locatie1));
+        //MOCK DATA END
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //Afstanden bereken eerst
+        //Distance products
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            locationListener.onProviderDisabled(LocationManager.GPS_PROVIDER);
         }else{
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000,
-                    5, locationListener);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000,
+                    1, locationListener);
         }
-        //calculate distance
+        //Initialize Data
         initRv();
-
-
         bottomNavigationView = findViewById(R.id.main_nav);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -119,15 +130,9 @@ public class MainActivity extends AppCompatActivity {
     private void initRv(){
         Log.d(TAG,"InitRV");
         RecyclerView recyclerView = findViewById(R.id.rv_posts);
-        ArrayList<Post> posts = new ArrayList<>();
-        posts.add(new Post("test1", 0.2, new ArrayList<String>(Arrays.asList("https://picsum.photos/id/325/200/200","url2"))));
-        posts.add(new Post("test2", 0.2, new ArrayList<String>(Arrays.asList("https://picsum.photos/id/325/200/200","url2"))));
-        posts.add(new Post("test3", 0.2, new ArrayList<String>(Arrays.asList("https://picsum.photos/id/325/200/200","url2"))));
-        posts.add(new Post("test4", 0.2, new ArrayList<String>(Arrays.asList("https://picsum.photos/id/325/200/200","url2"))));
         rvPostAdapter adapter = new rvPostAdapter(posts,this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
     }
 }
 
