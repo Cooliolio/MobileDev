@@ -1,1 +1,1 @@
-<img src="/resources/mainMock.png">
+<img src="/resources/mockMain.png">
