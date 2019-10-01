@@ -1,1 +1,1 @@
-![](/resources/mockMain.png?raw=true "Optional Title" | width=150)
+![](/resources/mockMain.png?raw=true "Optional Title")
