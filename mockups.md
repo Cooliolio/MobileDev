@@ -1,1 +1,1 @@
-<img src="/resources/mockMain.png">
+<img src="/resources/mockMain.png" width="30%">
