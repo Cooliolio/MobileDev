@@ -1,1 +1,1 @@
-!(/resources/mockMain.png?raw=true)
+![](/resources/mockMain.png?raw=true)
