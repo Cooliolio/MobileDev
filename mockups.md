@@ -1,1 +1,1 @@
-![Alt text](/resources/mockMain.png?raw=true "Optional Title" =250x250)
+![](/resources/mockMain.png?raw=true "Optional Title" | width=150)
