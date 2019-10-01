@@ -1,5 +1,5 @@
 ![](/resources/mockMain.png?raw=true){
-  width: 70%;
+  width: 30%;
   border: none;
   background: none;
 }
