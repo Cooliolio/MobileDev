@@ -1,1 +1,1 @@
-![](/resources/mockMain.png?raw=true "Optional Title")
+![](/resources/mockMain.png?raw=true =250x)
