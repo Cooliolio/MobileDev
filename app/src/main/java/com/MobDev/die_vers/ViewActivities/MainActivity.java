@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
         //Distance products
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            locationListener.onProviderDisabled(LocationManager.GPS_PROVIDER);
         }else{
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000,
                     1, locationListener);
@@ -105,9 +106,10 @@ public class MainActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.bottom_action_notifications:
-                        overridePendingTransition(0, 0);
-                        toActivity(new NewPostActivity());
-                        overridePendingTransition(0, 0);
+
+                        //overridePendingTransition(0, 0);
+                        //toActivity(new NewPostActivity());
+                        //overridePendingTransition(0, 0);
                         return true;
 
                     case R.id.bottom_action_profile:
