@@ -5,40 +5,37 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ViewActivities.MainActivity">
-
     <android.support.v7.widget.Toolbar
         android:id="@+id/main_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        >
-        <TextView
-            android:id="@+id/tv_name"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Welkom "
-            android:textSize="25sp"/>
+        android:theme="?attr/actionBarTheme">
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_margin="10dp"
+            android:layout_height="50dp"
+            android:id="@+id/ivToggleView"
+            android:layout_gravity="end"
+            android:background="@color/colorAccent"
+            android:src="@drawable/ic_toggle_grid"
+            />
     </android.support.v7.widget.Toolbar>
-    <FrameLayout
+    <fragment
+        android:name="com.MobDev.die_vers.ViewFragments.FragmentPosts"
         android:id="@+id/main_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/main_toolbar"
+        android:layout_below="@id/main_toolbar"
+        android:layout_above="@+id/main_nav"
         >
-        <android.support.v7.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/rv_posts"
-        />
-    </FrameLayout>
+    </fragment>
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/main_nav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:itemIconSize="30dp"
         android:layout_alignParentBottom="true"
-        app:menu="@menu/bottom_main_nav"
-        />
+        app:itemIconSize="30dp"
+        app:menu="@menu/bottom_main_nav"/>
 </RelativeLayout>
