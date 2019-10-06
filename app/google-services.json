@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "839976270441",
-    "firebase_url": "https://die-vers-7560b.firebaseio.com",
-    "project_id": "die-vers-7560b",
-    "storage_bucket": "die-vers-7560b.appspot.com"
+    "project_number": "808392599515",
+    "firebase_url": "https://die-vers-27c97.firebaseio.com",
+    "project_id": "die-vers-27c97",
+    "storage_bucket": "die-vers-27c97.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:839976270441:android:d4e4b666e34904c12180f8",
+        "mobilesdk_app_id": "1:808392599515:android:3200969c7ee4a8329769fe",
         "android_client_info": {
           "package_name": "com.MobDev.die_vers"
         }
       },
       "oauth_client": [
         {
-          "client_id": "839976270441-2udselh406f3c1nhaoeg0757ui7b9738.apps.googleusercontent.com",
+          "client_id": "808392599515-1incvu2udsg6r0ohlilg8896h0gdtik5.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.MobDev.die_vers",
@@ -23,20 +23,20 @@
           }
         },
         {
-          "client_id": "839976270441-3njpbhgddrodu03et5pcc3chl8jo3pon.apps.googleusercontent.com",
+          "client_id": "808392599515-a7s59qc6rkde0kfadejlukt4macbpmn7.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyClvyyGYCBpvnMAMSiYXAK9Lg_AHikZioE"
+          "current_key": "AIzaSyAiOaSyMtn8WSX06PVw8EiTrcFRCk7380o"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "839976270441-3njpbhgddrodu03et5pcc3chl8jo3pon.apps.googleusercontent.com",
+              "client_id": "808392599515-a7s59qc6rkde0kfadejlukt4macbpmn7.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

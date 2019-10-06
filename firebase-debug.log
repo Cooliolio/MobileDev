@@ -1,0 +1,36 @@
+[debug] [2019-10-06T17:30:04.769Z] ----------------------------------------------------------------------
+[debug] [2019-10-06T17:30:04.771Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\11700579\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js emulators:start --only firestore
+[debug] [2019-10-06T17:30:04.771Z] CLI Version:   7.3.2
+[debug] [2019-10-06T17:30:04.771Z] Platform:      win32
+[debug] [2019-10-06T17:30:04.771Z] Node Version:  v11.12.0
+[debug] [2019-10-06T17:30:04.773Z] Time:          Sun Oct 06 2019 19:30:04 GMT+0200 (GMT+02:00)
+[debug] [2019-10-06T17:30:04.773Z] ----------------------------------------------------------------------
+[debug] 
+[warn] !  Could not find config (firebase.json) so using defaults.
+[info] i  Starting emulators: ["firestore"]
+[warn] !  No Firestore rules file specified in firebase.json, using default rules.
+[info] i  firestore: Serving WebChannel traffic on at http://localhost:8081
+[info] i  firestore: downloading cloud-firestore-emulator-v1.8.4.jar...
+[debug] [2019-10-06T17:30:36.620Z] Ignoring unsupported arg: projectId
+[debug] [2019-10-06T17:30:36.620Z] Ignoring unsupported arg: auto_download
+[debug] [2019-10-06T17:30:36.637Z] Starting emulator firestore with command {"binary":"java","args":["-Duser.language=en","-jar","C:\\Users\\11700579\\.cache\\firebase\\emulators\\cloud-firestore-emulator-v1.8.4.jar","--host","localhost","--port",8080,"--webchannel_port",8081],"optionalArgs":["port","webchannel_port","host","rules","functions_emulator"]}
+[info] i  firestore: Emulator logging to firestore-debug.log
+[debug] [2019-10-06T17:30:38.602Z] API endpoint: http://localhost:8080
+
+[debug] [2019-10-06T17:30:38.602Z] WebChannel endpoint: http://localhost:8081
+If you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:
+
+   export FIRESTORE_EMULATOR_HOST=localhost:8080
+
+Dev App Server is now running.
+
+
+[info] +  firestore: Emulator started at http://localhost:8080
+[info] i  firestore: For testing set FIRESTORE_EMULATOR_HOST=localhost:8080
+[info] +  All emulators started, it is now safe to connect.
+[debug] [2019-10-06T17:31:47.765Z] Oct 06, 2019 7:31:47 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+
+[debug] [2019-10-06T17:31:48.002Z] Oct 06, 2019 7:31:48 PM io.gapi.emulators.netty.NotFoundHandler handleRequest
+INFO: Unknown request URI: /favicon.ico
+

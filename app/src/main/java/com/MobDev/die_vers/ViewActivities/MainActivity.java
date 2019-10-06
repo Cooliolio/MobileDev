@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         fragmentPosts = (FragmentPosts) getSupportFragmentManager().findFragmentById(R.id.main_container);
 
         ivToggleView = findViewById(R.id.ivToggleView);
+
         ivToggleView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
     }
 }
 
