@@ -28,27 +28,7 @@ public class FragmentPosts extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        new FirebaseDatabaseHelper().readPosts(new FirebaseDatabaseHelper.DataStatus() {
-            @Override
-            public void DataIsLoaded(List<Post> posts, List<String> keys) {
-                setConfig(posts, keys);
-            }
-
-            @Override
-            public void DataIsInserted() {
-
-            }
-
-            @Override
-            public void DataIsUpdated() {
-
-            }
-
-            @Override
-            public void DataIsDeleted() {
-
-            }
-        });
+        new FirebaseDatabaseHelper().readPosts();
     }
 
     @Override
