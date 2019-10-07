@@ -13,13 +13,16 @@ import com.MobDev.die_vers.DomainClasses.Post;
 import com.MobDev.die_vers.Helpers.FirebaseDatabaseHelper;
 import com.MobDev.die_vers.R;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class FragmentPosts extends Fragment {
 
     RecyclerView rvPosts;
     PostAdapter adapter;
     View view;
+    FirebaseDatabaseHelper firebaseDatabaseHelper;
     private GridLayoutManager gridLayoutManager;
 
     public FragmentPosts() {
@@ -28,13 +31,15 @@ public class FragmentPosts extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        new FirebaseDatabaseHelper().readPosts();
+        firebaseDatabaseHelper = new FirebaseDatabaseHelper();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         this.view = inflater.inflate(R.layout.fragment_posts, container, false);
+        setConfig();
+
         return view;
     }
     public void changeLayout(){
@@ -47,8 +52,8 @@ public class FragmentPosts extends Fragment {
         adapter.notifyItemRangeChanged(0, adapter.getItemCount());
     }
 
-    public void setConfig(List<Post> posts, List<String> keys){
-        this.adapter = new PostAdapter(posts,this, keys);
+    public void setConfig(){
+        this.adapter = new PostAdapter(this);
         rvPosts = view.findViewById(R.id.rv_posts);
         rvPosts.setHasFixedSize(true);
         gridLayoutManager = new GridLayoutManager(view.getContext(),1);

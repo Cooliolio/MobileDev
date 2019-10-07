@@ -7,88 +7,51 @@ import java.util.Date;
 
 public class Post {
 
-    private int post_id;
-    private String post_title;
+    private String id;
+    private String title;
     private boolean priced; //true == prijs | false == prijs overeenkomen
     private double price;
     private double[] bets;
     private Location location;
     private int user_id; // Naam van poster and rating
-    private Date post_date;
-    private String post_description;
+    private Date date;
+    private String description;
     private ArrayList<String> imageUrls; // KAN vervangen worden door STRING[]
-    private double post_distance;
 
-    public Post(int post_id, String post_title, boolean priced, double price, double[] bets, Location location, int user_id, Date post_date, String post_description, ArrayList<String> imageUrls) {
-        this.post_id = post_id;
-        this.post_title = post_title;
+    public Post(String post_id, String post_title, boolean priced, double price, double[] bets, Location location, int user_id, Date post_date, String post_description, ArrayList<String> imageUrls) {
+        this.id = post_id;
+        this.title = post_title;
         this.priced = priced;
         this.price = price;
         this.bets = bets;
         this.location = location;
         this.user_id = user_id;
-        this.post_date = post_date;
-        this.post_description = post_description;
+        this.date = post_date;
+        this.description = post_description;
         this.imageUrls = imageUrls;
     }
     public Post(String post_title, double price, ArrayList<String> imageUrls, Location location) {
-        this.post_title = post_title;
+        this.title = post_title;
         this.price = price;
         this.imageUrls = imageUrls;
         this.location = location;
     }
     public Post() {
     }
-
-
-    public double getPost_distance() {
-        return post_distance;
+    public String getId() {
+        return id;
     }
 
-    public void setPost_distance(double post_distance) {
-        this.post_distance = post_distance;
+    public void setId(String id) {
+        this.id = id;
     }
 
-
-
-    public Location getLocation() {
-        return location;
+    public String getTitle() {
+        return title;
     }
 
-    public void setLocation(Location location) {
-        this.location = location;
-    }
-
-    public String getPost_title() {
-        return post_title;
-    }
-
-    public void setPost_title(String post_title) {
-        this.post_title = post_title;
-    }
-
-    public double[] getBets() {
-        return bets;
-    }
-
-    public void setBets(double[] bets) {
-        this.bets = bets;
-    }
-
-    public ArrayList<String> getImageUrls() {
-        return imageUrls;
-    }
-
-    public void setImageUrls(ArrayList<String> imageUrls) {
-        this.imageUrls = imageUrls;
-    }
-
-    public int getPost_id() {
-        return post_id;
-    }
-
-    public void setPost_id(int post_id) {
-        this.post_id = post_id;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public boolean isPriced() {
@@ -107,6 +70,22 @@ public class Post {
         this.price = price;
     }
 
+    public double[] getBets() {
+        return bets;
+    }
+
+    public void setBets(double[] bets) {
+        this.bets = bets;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
     public int getUser_id() {
         return user_id;
     }
@@ -115,19 +94,28 @@ public class Post {
         this.user_id = user_id;
     }
 
-    public Date getPost_date() {
-        return post_date;
+    public Date getDate() {
+        return date;
     }
 
-    public void setPost_date(Date post_date) {
-        this.post_date = post_date;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
-    public String getPost_description() {
-        return post_description;
+    public String getDescription() {
+        return description;
     }
 
-    public void setPost_description(String post_description) {
-        this.post_description = post_description;
+    public void setDescription(String description) {
+        this.description = description;
     }
+
+    public ArrayList<String> getImageUrls() {
+        return imageUrls;
+    }
+
+    public void setImageUrls(ArrayList<String> imageUrls) {
+        this.imageUrls = imageUrls;
+    }
+
 }

@@ -5,8 +5,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.MobDev.die_vers.DomainClasses.Post;
+import com.MobDev.die_vers.Helpers.FirebaseDatabaseHelper;
 import com.MobDev.die_vers.R;
 import com.MobDev.die_vers.ViewFragments.FragmentPosts;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
