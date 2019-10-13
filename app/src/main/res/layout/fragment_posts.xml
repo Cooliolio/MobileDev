@@ -3,9 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ViewFragments.FragmentPosts">
+    tools:context=".ViewFragments.PostFragment">
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/rv_posts"/>
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_margin="10dp"
+        android:layout_height="50dp"
+        android:id="@+id/ivToggleView"
+        android:background="@color/colorAccent"
+        android:src="@drawable/ic_toggle_grid"
+        android:layout_gravity="end"
+        />
 </FrameLayout>

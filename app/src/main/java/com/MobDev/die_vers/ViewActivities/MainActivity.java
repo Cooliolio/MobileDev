@@ -1,46 +1,52 @@
 package com.MobDev.die_vers.ViewActivities;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.MobDev.die_vers.Adapters.PostAdapter;
 import com.MobDev.die_vers.DomainClasses.Post;
-import com.MobDev.die_vers.Helpers.FirebaseDatabaseHelper;
 import com.MobDev.die_vers.R;
-import com.MobDev.die_vers.ViewFragments.FragmentPosts;
+import com.MobDev.die_vers.ViewFragments.PostDetailFragment;
+import com.MobDev.die_vers.ViewFragments.PostFragment;
 
-import java.util.ArrayList;
-
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
     //UI ELLEMENTS
-    ImageView ivToggleView;
-    FragmentPosts fragmentPosts;
+    PostFragment postFragment;
+    FragmentManager fragmentManager;
+    FragmentTransaction fragmentTransaction;
+    FrameLayout fragmentContainer;
 
-    private boolean togleImage = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        fragmentPosts = (FragmentPosts) getSupportFragmentManager().findFragmentById(R.id.main_container);
+        fragmentContainer = (FrameLayout) findViewById(R.id.main_container);
 
-        ivToggleView = findViewById(R.id.ivToggleView);
+        postFragment = new PostFragment();
+        fragmentManager = getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.main_container, postFragment);
+        fragmentTransaction.commit();
 
-        ivToggleView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                fragmentPosts.changeLayout();
-                if(togleImage){
-                    ivToggleView.setImageResource(R.drawable.ic_toggle_list);
-                    togleImage =false;
-                }else{
-                    ivToggleView.setImageResource(R.drawable.ic_toggle_grid);
-                    togleImage = true;
-                }
-            }
-        });
+    }
 
+    public void swapFragment(){
+        PostDetailFragment newPostDetailFragment = PostDetailFragment.newInstance();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        fragmentTransaction.replace(R.id.main_container, newPostDetailFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 }
 

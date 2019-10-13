@@ -15,7 +15,9 @@
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
         app:cardCornerRadius="10dp"
-        android:backgroundTint="@color/colorAccent">
+        android:backgroundTint="@color/colorAccent"
+        android:id="@+id/cv_post"
+        >
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"

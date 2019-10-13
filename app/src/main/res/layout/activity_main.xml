@@ -12,25 +12,28 @@
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Die-Vers"
+            android:textSize="26dp"/>
         <ImageView
             android:layout_width="50dp"
-            android:layout_margin="10dp"
             android:layout_height="50dp"
-            android:id="@+id/ivToggleView"
-            android:layout_gravity="end"
-            android:background="@color/colorAccent"
-            android:src="@drawable/ic_toggle_grid"
-            />
+            android:layout_margin="10dp"
+            android:id="@+id/tvProfile"
+            android:src="@drawable/ic_profile"
+            android:layout_gravity="end">
+        </ImageView>
     </android.support.v7.widget.Toolbar>
-    <fragment
-        android:name="com.MobDev.die_vers.ViewFragments.FragmentPosts"
+    <FrameLayout
         android:id="@+id/main_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/main_toolbar"
         android:layout_above="@+id/main_nav"
         >
-    </fragment>
+    </FrameLayout>
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/main_nav"
         android:layout_width="match_parent"
