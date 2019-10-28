@@ -62,6 +62,7 @@ public class PostFragment extends Fragment implements PostAdapter.OnPostListener
                     for (DocumentChange doc : queryDocumentSnapshots.getDocumentChanges()) {
                         if (doc.getType() == DocumentChange.Type.ADDED) {
                             Post post = doc.getDocument().toObject(Post.class);
+                            post.setId(doc.getDocument().getId());
                             posts.add(post);
                             adapter.notifyDataSetChanged();
                         }
@@ -99,9 +100,10 @@ public class PostFragment extends Fragment implements PostAdapter.OnPostListener
 
     @Override
     public void onPostClick(int position) {
-        // Post post = postFragment.getSelectedPost(position);
-        Log.d("title", getSelectedPost(position).getTitle());
-        ((MainActivity)getActivity()).swapFragment();
+        Post post = this.getSelectedPost(position);
+        Bundle data = new Bundle();
+        data.putString("post_id", post.getId());
+        ((MainActivity)getActivity()).swapFragment(data);
     }
     public void gridListEvent(){
         ivToggleView = view.findViewById(R.id.ivToggleView);

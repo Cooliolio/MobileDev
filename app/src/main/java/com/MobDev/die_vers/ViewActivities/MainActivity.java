@@ -39,11 +39,12 @@ public class MainActivity extends AppCompatActivity{
 
     }
 
-    public void swapFragment(){
+    public void swapFragment(Bundle data){
         PostDetailFragment newPostDetailFragment = PostDetailFragment.newInstance();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        newPostDetailFragment.setArguments(data);
         fragmentTransaction.replace(R.id.main_container, newPostDetailFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
