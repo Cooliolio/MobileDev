@@ -2,6 +2,8 @@ package com.MobDev.die_vers.DomainClasses;
 
 import android.location.Location;
 
+import com.google.firebase.Timestamp;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -9,35 +11,38 @@ public class Post {
 
     private String id;
     private String title;
-    private boolean priced; //true == prijs | false == prijs overeenkomen
     private double price;
-    private double[] bets;
-    private Location location;
-    private int user_id; // Naam van poster and rating
     private Date date;
     private String description;
-    private ArrayList<String> imageUrls; // KAN vervangen worden door STRING[]
+    private ArrayList<String> imageUrls;
+    private String category;
 
-    public Post(String post_id, String post_title, boolean priced, double price, double[] bets, Location location, int user_id, Date post_date, String post_description, ArrayList<String> imageUrls) {
-        this.id = post_id;
-        this.title = post_title;
-        this.priced = priced;
+
+    private String userId; // Naam van poster and rating
+    //From user
+    private String postcode;
+
+
+    public Post(String id, String title, double price, Date date, String description, ArrayList<String> imageUrls, String userId, String postcode, String category) {
+        this.id = id;
+        this.title = title;
         this.price = price;
-        this.bets = bets;
-        this.location = location;
-        this.user_id = user_id;
-        this.date = post_date;
-        this.description = post_description;
+        this.date = date;
+        this.description = description;
         this.imageUrls = imageUrls;
+        this.userId = userId;
+        this.postcode = postcode;
+        this.category = category;
     }
-    public Post(String post_title, double price, ArrayList<String> imageUrls, Location location) {
+
+    public Post(String post_title, double price, ArrayList<String> imageUrls) {
         this.title = post_title;
         this.price = price;
         this.imageUrls = imageUrls;
-        this.location = location;
     }
     public Post() {
     }
+
     public String getId() {
         return id;
     }
@@ -54,44 +59,12 @@ public class Post {
         this.title = title;
     }
 
-    public boolean isPriced() {
-        return priced;
-    }
-
-    public void setPriced(boolean priced) {
-        this.priced = priced;
-    }
-
     public double getPrice() {
         return price;
     }
 
     public void setPrice(double price) {
         this.price = price;
-    }
-
-    public double[] getBets() {
-        return bets;
-    }
-
-    public void setBets(double[] bets) {
-        this.bets = bets;
-    }
-
-    public Location getLocation() {
-        return location;
-    }
-
-    public void setLocation(Location location) {
-        this.location = location;
-    }
-
-    public int getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
     }
 
     public Date getDate() {
@@ -118,4 +91,27 @@ public class Post {
         this.imageUrls = imageUrls;
     }
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getPostcode() {
+        return postcode;
+    }
+
+    public void setPostcode(String postcode) {
+        this.postcode = postcode;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
 }

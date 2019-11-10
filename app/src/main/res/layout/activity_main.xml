@@ -4,7 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ViewActivities.MainActivity">
+    tools:context=".ViewActivities.MainActivity"
+
+    android:focusable="true"
+    android:focusableInTouchMode="true">
     <android.support.v7.widget.Toolbar
         android:id="@+id/main_toolbar"
         android:layout_width="match_parent"
@@ -12,19 +15,26 @@
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@mipmap/ic_launcher_foreground"
+            />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="Die-Vers"
-            android:textSize="26dp"/>
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_margin="10dp"
-            android:id="@+id/tvProfile"
-            android:src="@drawable/ic_profile"
-            android:layout_gravity="end">
-        </ImageView>
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            />
+        <SearchView
+            android:layout_marginLeft="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/search_bar"
+            android:layoutDirection="rtl"/>
+
     </android.support.v7.widget.Toolbar>
     <FrameLayout
         android:id="@+id/main_container"
@@ -40,5 +50,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         app:itemIconSize="30dp"
+        android:background="@color/colorPrimary"
+        app:itemIconTint="@drawable/bottom_navigation_colors"
+        app:itemTextColor="@color/colorAccentDark"
+
         app:menu="@menu/bottom_main_nav"/>
 </RelativeLayout>

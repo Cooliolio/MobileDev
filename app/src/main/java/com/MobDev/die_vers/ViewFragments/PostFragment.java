@@ -1,7 +1,11 @@
 package com.MobDev.die_vers.ViewFragments;
 
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -18,13 +22,18 @@ import com.MobDev.die_vers.DomainClasses.Post;
 import com.MobDev.die_vers.Helpers.FirebaseDatabaseHelper;
 import com.MobDev.die_vers.R;
 import com.MobDev.die_vers.ViewActivities.MainActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -48,30 +57,33 @@ public class PostFragment extends Fragment implements PostAdapter.OnPostListener
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        this.view = inflater.inflate(R.layout.fragment_posts, container, false);
-        Query firstQuery = db.collection("Posts");
-        firstQuery.addSnapshotListener(getActivity(), new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                if (!queryDocumentSnapshots.isEmpty()) {
-                    for (DocumentChange doc : queryDocumentSnapshots.getDocumentChanges()) {
-                        if (doc.getType() == DocumentChange.Type.ADDED) {
-                            Post post = doc.getDocument().toObject(Post.class);
-                            post.setId(doc.getDocument().getId());
-                            posts.add(post);
-                            adapter.notifyDataSetChanged();
+        if(savedInstanceState == null) {
+            this.view = inflater.inflate(R.layout.fragment_posts, container, false);
+            Query firstQuery = db.collection("Posts");
+            firstQuery.addSnapshotListener(getActivity(), new EventListener<QuerySnapshot>() {
+                @Override
+                public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                    if (!queryDocumentSnapshots.isEmpty()) {
+                        for (DocumentChange doc : queryDocumentSnapshots.getDocumentChanges()) {
+                            if (doc.getType() == DocumentChange.Type.ADDED) {
+                                Post post = doc.getDocument().toObject(Post.class);
+                                post.setId(doc.getDocument().getId());
+                                posts.add(post);
+                                adapter.notifyDataSetChanged();
+                            }
                         }
                     }
                 }
-            }
-        });
-        setConfig();
-        gridListEvent();
+            });
+            setConfig();
+        }
+
         return view;
     }
     public void changeLayout(){
@@ -89,7 +101,13 @@ public class PostFragment extends Fragment implements PostAdapter.OnPostListener
         adapter.setPosts(posts);
         rvPosts = view.findViewById(R.id.rv_posts);
         rvPosts.setHasFixedSize(true);
-        gridLayoutManager = new GridLayoutManager(view.getContext(),1);
+        int span = 1;
+        if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            span = 2;
+        }else {
+            span  = 1;
+        }
+        gridLayoutManager = new GridLayoutManager(view.getContext(),span);
         rvPosts.setLayoutManager(gridLayoutManager);
         rvPosts.setAdapter(adapter);//HIER
     }
@@ -104,20 +122,45 @@ public class PostFragment extends Fragment implements PostAdapter.OnPostListener
         Bundle data = new Bundle();
         data.putString("post_id", post.getId());
         ((MainActivity)getActivity()).swapFragment(data);
+
     }
-    public void gridListEvent(){
-        ivToggleView = view.findViewById(R.id.ivToggleView);
-        ivToggleView.setOnClickListener(new View.OnClickListener() {
+
+    public void resetData() {
+        db.collection("Posts").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
-            public void onClick(View v) {
-                changeLayout();
-                if (togleImage) {
-                    ivToggleView.setImageResource(R.drawable.ic_toggle_list);
-                    togleImage = false;
-                } else {
-                    ivToggleView.setImageResource(R.drawable.ic_toggle_grid);
-                    togleImage = true;
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                posts.clear();
+                for (DocumentSnapshot doc : task.getResult()) {
+                    Post post = doc.toObject(Post.class);
+                    post.setId(doc.getId());
+                    posts.add(post);
                 }
+                rvPosts.setAdapter(adapter);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
+    }
+
+    public void searchData(String query) {
+        db.collection("Posts").whereEqualTo("category", query.toLowerCase()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                posts.clear();
+                for(DocumentSnapshot doc : task.getResult()){
+                    Post post = doc.toObject(Post.class);
+                    post.setId(doc.getId());
+                    posts.add(post);
+                }
+                rvPosts.setAdapter(adapter);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
             }
         });
     }

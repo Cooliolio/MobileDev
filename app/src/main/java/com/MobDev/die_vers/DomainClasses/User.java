@@ -2,11 +2,11 @@ package com.MobDev.die_vers.DomainClasses;
 
 public class User {
     private int id;
-    private String name;
+    private String postcode;
 
-    public User(int id, String name) {
+    public User(int id, String postcode) {
         this.id = id;
-        this.name = name;
+        this.postcode = postcode;
     }
 
     public int getId() {
@@ -17,11 +17,11 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getPostcode() {
+        return postcode;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPostcode(String postcode) {
+        this.postcode = postcode;
     }
 }

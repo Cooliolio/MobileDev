@@ -16,6 +16,8 @@ public class PostItemViewHolder extends RecyclerView.ViewHolder implements View.
     public TextView postTitle;
     public TextView postDistance;
     public TextView postPrice;
+    public  TextView postDate;
+
     PostAdapter.OnPostListener onPostListener;
 
     public PostItemViewHolder(@NonNull View itemView, PostAdapter.OnPostListener onPostListener) {
@@ -24,6 +26,7 @@ public class PostItemViewHolder extends RecyclerView.ViewHolder implements View.
         postTitle = itemView.findViewById(R.id.tv_post_title);
         postPrice = itemView.findViewById(R.id.tv_post_price);
         postDistance = itemView.findViewById(R.id.tv_post_distance);
+        postDate = itemView.findViewById(R.id.tv_post_date);
         this.onPostListener = onPostListener;
         itemView.setOnClickListener(this);
     }

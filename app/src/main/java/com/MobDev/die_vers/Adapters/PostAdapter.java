@@ -1,5 +1,6 @@
 package com.MobDev.die_vers.Adapters;
 
+import android.location.Geocoder;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
@@ -22,14 +23,19 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.IOException;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class PostAdapter extends RecyclerView.Adapter<PostItemViewHolder> {
 
     private PostFragment mContext;
     private static DecimalFormat df2 = new DecimalFormat("#.##");
+    private static SimpleDateFormat df1 = new SimpleDateFormat("dd/MM/yy") ;
     private boolean bigSmalView = true;
 
 
@@ -48,10 +54,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostItemViewHolder> {
                     .load(posts.get(position).getImageUrls().get(0))
                     .into(postItemViewHolder.postImage);
             postItemViewHolder.postTitle.setText(posts.get(position).getTitle());
-            postItemViewHolder.postPrice.setText(posts.get(position).getPrice() + "EUR");
-            if (bigSmalView) {
-
-            }
+            postItemViewHolder.postPrice.setText(posts.get(position).getPrice() + " EUR");
+            postItemViewHolder.postDate.setText(df1.format(posts.get(position).getDate()));
+            postItemViewHolder.postDistance.setText(posts.get(position).getPostcode());
     }
 
     @Override
@@ -69,8 +74,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostItemViewHolder> {
         View view = null;
         if (bigSmalView) {
             view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.post_list_item_big, viewGroup, false);
-        } else {
-            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.post_list_item_small, viewGroup, false);
         }
         PostItemViewHolder holder = new PostItemViewHolder(view, onPostListener);
         return holder;
