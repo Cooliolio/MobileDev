@@ -3,6 +3,7 @@ package com.MobDev.die_vers.Adapters;
 import android.location.Geocoder;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,6 +42,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostItemViewHolder> {
 
     private List<Post> posts = new ArrayList<>();
     private OnPostListener onPostListener;
+
     // True => BigLayout
     public PostAdapter(PostFragment mContext, OnPostListener onPostListener) {
         this.mContext = mContext;
@@ -54,7 +56,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostItemViewHolder> {
                     .load(posts.get(position).getImageUrls().get(0))
                     .into(postItemViewHolder.postImage);
             postItemViewHolder.postTitle.setText(posts.get(position).getTitle());
-            postItemViewHolder.postPrice.setText(posts.get(position).getPrice() + " EUR");
+            postItemViewHolder.postPrice.setText("€"+posts.get(position).getPrice());
             postItemViewHolder.postDate.setText(df1.format(posts.get(position).getDate()));
             postItemViewHolder.postDistance.setText(posts.get(position).getPostcode());
     }

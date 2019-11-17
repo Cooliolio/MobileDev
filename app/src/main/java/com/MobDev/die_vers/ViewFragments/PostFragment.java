@@ -1,17 +1,12 @@
 package com.MobDev.die_vers.ViewFragments;
 
-import android.content.Intent;
 import android.content.res.Configuration;
-import android.location.Address;
-import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +14,6 @@ import android.widget.ImageView;
 
 import com.MobDev.die_vers.Adapters.PostAdapter;
 import com.MobDev.die_vers.DomainClasses.Post;
-import com.MobDev.die_vers.Helpers.FirebaseDatabaseHelper;
 import com.MobDev.die_vers.R;
 import com.MobDev.die_vers.ViewActivities.MainActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -33,11 +27,8 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class PostFragment extends Fragment implements PostAdapter.OnPostListener{
 
@@ -86,15 +77,6 @@ public class PostFragment extends Fragment implements PostAdapter.OnPostListener
 
         return view;
     }
-    public void changeLayout(){
-        adapter.changeGrid();
-        if(gridLayoutManager.getSpanCount() == 1){
-            gridLayoutManager.setSpanCount(2);
-        }else{
-            gridLayoutManager.setSpanCount(1);
-        }
-        adapter.notifyItemRangeChanged(0, adapter.getItemCount());
-    }
 
     public void setConfig(){
         adapter.clear();
@@ -121,7 +103,7 @@ public class PostFragment extends Fragment implements PostAdapter.OnPostListener
         Post post = this.getSelectedPost(position);
         Bundle data = new Bundle();
         data.putString("post_id", post.getId());
-        ((MainActivity)getActivity()).swapFragment(data);
+        ((MainActivity)getActivity()).swapDetailFragment(data);
 
     }
 
@@ -163,5 +145,11 @@ public class PostFragment extends Fragment implements PostAdapter.OnPostListener
 
             }
         });
+
+
     }
+    public static PostFragment newInstance() {
+        return new PostFragment();
+    }
+
 }

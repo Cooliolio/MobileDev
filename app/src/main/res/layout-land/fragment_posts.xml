@@ -5,10 +5,19 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ViewFragments.PostFragment">
+    <RelativeLayout
+        android:id="@+id/tv_detail_title"
+        style="@style/TitleStyle"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/colorGreen"
+        />
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="35dp"
         android:id="@+id/rv_posts"
-        android:background="@color/white"
         />
 </FrameLayout>

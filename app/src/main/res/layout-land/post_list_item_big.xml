@@ -9,72 +9,68 @@
     >
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/colorAccent"
+        android:layout_height="100dp"
         android:id="@+id/cv_post"
+        android:elevation="1000dp"
+        app:cardBackgroundColor="@color/white"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        app:cardCornerRadius="10dp"
         >
         <ImageView
             style="@style/BackGroundImageView"
             android:id="@+id/iv_post"
-            android:layout_width="match_parent"
+            android:layout_width="100dp"
             android:layout_height="match_parent"
             android:src="@drawable/ic_home"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:scaleType="fitXY"
+            android:scaleType="centerCrop"
             />
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:ignore="MissingConstraints">
             <TextView
+                style="@style/TitleStyle"
                 android:id="@+id/tv_post_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
                 android:text="Ik verkoop appels"
                 android:maxLength="30"
-                android:textSize="25sp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 />
 
             <!-- Test Foto -->
 
             <TextView
+                style="@style/InfoStyle"
                 android:id="@+id/tv_post_distance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"
                 android:text="20 km Heusden"
-                android:textSize="20sp"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_post_title"
-                android:textColor="@color/white"
                 />
 
             <TextView
+                style="@style/InfoStyle"
                 android:id="@+id/tv_post_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginRight="8dp"
                 android:text="Helemaal Gratis!"
-                android:textSize="20sp"
-                android:textColor="@color/white"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_post_distance" />
             <TextView
+                style="@style/InfoStyle"
                 android:id="@+id/tv_post_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginRight="8dp"
                 android:text="Datum"
-                android:textSize="20sp"
-                android:textColor="@color/white"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_post_price" />
         </android.support.constraint.ConstraintLayout>
