@@ -1,41 +1,41 @@
 package com.MobDev.die_vers.ViewActivities;
 
-import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationItemView;
-import android.support.design.internal.BottomNavigationMenu;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.SearchView;
+import android.widget.Toast;
 
-import com.MobDev.die_vers.Adapters.PostAdapter;
-import com.MobDev.die_vers.DomainClasses.Post;
+import com.MobDev.die_vers.DomainClasses.User;
 import com.MobDev.die_vers.R;
 import com.MobDev.die_vers.ViewFragments.PostDetailFragment;
 import com.MobDev.die_vers.ViewFragments.PostFragment;
+import com.MobDev.die_vers.ViewFragments.ProfileFragment;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity {
 
+    FirebaseAuth mAuth;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+
     //UI ELLEMENTS
     PostFragment postFragment;
+    ProfileFragment profileFragment;
     PostDetailFragment newPostDetailFragment;
+    ProfileFragment newProfileFragment;
     FragmentManager fragmentManager;
-    FragmentTransaction fragmentTransaction;
-    FrameLayout fragmentContainer;
     SearchView searchView;
     BottomNavigationItemView homeItem;
     BottomNavigationView bottomNavigationView;
@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
             fragmentManager = getSupportFragmentManager();
             postFragment = new PostFragment();
+            profileFragment = new ProfileFragment();
             setContentView(R.layout.activity_main);
             searchView = findViewById(R.id.search_bar);
             int searchCloseButtonId = searchView.getContext().getResources().getIdentifier("android:id/search_close_btn", null, null);
@@ -52,6 +53,17 @@ public class MainActivity extends AppCompatActivity {
             homeItem = findViewById(R.id.bottom_action_home);
 
             bottomNavigationView = findViewById(R.id.bottom_navigation);
+
+            mAuth = FirebaseAuth.getInstance();
+            if(mAuth.getCurrentUser() != null){
+                final DocumentReference docRef = db.collection("Users").document(mAuth.getCurrentUser().getUid());
+                docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        User user = documentSnapshot.toObject(User.class);
+                    }
+                });
+            }
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -61,6 +73,11 @@ public class MainActivity extends AppCompatActivity {
                     searchView.setIconified(true);
                     postFragment.resetData();
                     swapPostFragment(postFragment);
+                }
+                if (item.getItemId() == R.id.bottom_action_profile) {
+                    searchView.setQuery("", false);
+                    searchView.setIconified(true);
+                    swapProfileFragment(profileFragment);
                 }
                 return true;
             }
@@ -100,6 +117,19 @@ public class MainActivity extends AppCompatActivity {
         if (newPostDetailFragment != null) {
             if (newPostDetailFragment.isAdded()) {
                 fragmentTransaction.remove(newPostDetailFragment);
+            }
+        }
+        fragmentTransaction.commit();
+    }
+    public void swapProfileFragment(ProfileFragment pf) {
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        if (!pf.isAdded()) {
+            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            fragmentTransaction.replace(R.id.main_container, pf);
+        }
+        if (newProfileFragment != null) {
+            if (newProfileFragment.isAdded()) {
+                fragmentTransaction.remove(newProfileFragment);
             }
         }
         fragmentTransaction.commit();

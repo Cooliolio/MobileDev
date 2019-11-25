@@ -11,6 +11,8 @@
         android:theme="@style/AppTheme">
         <activity android:name=".ViewActivities.MainActivity">
         </activity>
+        <activity android:name=".ViewActivities.SignupActivity">
+        </activity>
         <activity android:name=".ViewActivities.LoginActivity"><intent-filter>
             <action android:name="android.intent.action.MAIN" />
 

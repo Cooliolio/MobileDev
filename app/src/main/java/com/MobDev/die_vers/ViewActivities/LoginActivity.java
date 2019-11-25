@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.MobDev.die_vers.R;
 import com.firebase.ui.auth.IdpResponse;
@@ -17,12 +18,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
 public class LoginActivity extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 1;
     private FirebaseAuth mAuth;
-
-
     //UI
     EditText et_email;
     EditText et_password;
@@ -39,7 +39,6 @@ public class LoginActivity extends AppCompatActivity {
         et_password = findViewById(R.id.et_password_login);
         _loginButton = findViewById(R.id.btn_login);
         _signupLink = findViewById(R.id.link_signup);
-
         _loginButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -47,7 +46,15 @@ public class LoginActivity extends AppCompatActivity {
                 login();
             }
         });
+        _signupLink.setOnClickListener(new View.OnClickListener() {
 
+            @Override
+            public void onClick(View v) {
+                // Start the Signup activity
+                Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
+                startActivityForResult(intent, RC_SIGN_IN);
+            }
+        });
     }
 
     public void login() {
@@ -66,27 +73,30 @@ public class LoginActivity extends AppCompatActivity {
         final String email = et_email.getText().toString();
         final String password = et_password.getText().toString();
 
-                        mAuth.signInWithEmailAndPassword(email, password)
-                                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<AuthResult> task) {
-                                        if (task.isSuccessful()) {
-                                            // Sign in success, update UI with the signed-in user's information
-                                            FirebaseUser user = mAuth.getCurrentUser();
-                                            finish();
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            finish();
 
-                                            // Successfully signed in
-                                            MainActivity mainActivity = new MainActivity();
-                                            Intent intent = new Intent(getBaseContext(),MainActivity.class);
-                                            startActivity(intent);
-                                        } else {
-                                            // If sign in fails, display a message to the user.
-                                            progressDialog.dismiss();
-                                            onLoginFailed();
-                                        }
-                                    }
-                                });
+                            // Successfully signed in
+                            MainActivity mainActivity = new MainActivity();
+                            Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                            startActivity(intent);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            progressDialog.dismiss();
+                            onLoginFailed();
+                            Toast failedLogin = Toast.makeText(getApplicationContext(), "Wrong Credentials", Toast.LENGTH_LONG);
+                            failedLogin.show();
+
+                        }
                     }
+                });
+    }
 
     @Override
     public void onBackPressed() {
@@ -111,7 +121,7 @@ public class LoginActivity extends AppCompatActivity {
             et_email.setError(null);
         }
 
-        if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
+        if (password.isEmpty() || password.length() < 6) {
             et_password.setError("between 4 and 10 alphanumeric characters");
             valid = false;
         } else {
