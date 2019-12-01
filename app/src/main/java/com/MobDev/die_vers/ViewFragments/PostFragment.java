@@ -145,11 +145,28 @@ public class PostFragment extends Fragment implements PostAdapter.OnPostListener
 
             }
         });
-
-
     }
     public static PostFragment newInstance() {
         return new PostFragment();
     }
 
+    public void profilePosts(String userId){
+        db.collection("Posts").whereEqualTo("userId", userId).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                posts.clear();
+                for(DocumentSnapshot doc : task.getResult()){
+                    Post post = doc.toObject(Post.class);
+                    post.setId(doc.getId());
+                    posts.add(post);
+                }
+                rvPosts.setAdapter(adapter);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
+    }
 }

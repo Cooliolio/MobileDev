@@ -15,6 +15,7 @@ import com.MobDev.die_vers.R;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -34,13 +35,17 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
+        if(mAuth.getCurrentUser() != null){
+            Intent intent = new Intent(getBaseContext(), MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
         setContentView(R.layout.activity_login);
         et_email = findViewById(R.id.et_email_login);
         et_password = findViewById(R.id.et_password_login);
         _loginButton = findViewById(R.id.btn_login);
         _signupLink = findViewById(R.id.link_signup);
         _loginButton.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 login();
@@ -83,7 +88,6 @@ public class LoginActivity extends AppCompatActivity {
                             finish();
 
                             // Successfully signed in
-                            MainActivity mainActivity = new MainActivity();
                             Intent intent = new Intent(getBaseContext(), MainActivity.class);
                             startActivity(intent);
                         } else {

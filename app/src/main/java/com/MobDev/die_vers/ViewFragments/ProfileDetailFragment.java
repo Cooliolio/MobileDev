@@ -1,6 +1,7 @@
 package com.MobDev.die_vers.ViewFragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,10 +10,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.MobDev.die_vers.DomainClasses.User;
 import com.MobDev.die_vers.R;
+import com.MobDev.die_vers.ViewActivities.LoginActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,8 +32,6 @@ public class ProfileDetailFragment extends Fragment {
     private Context mcontext;
     private static SimpleDateFormat df1 = new SimpleDateFormat("dd/MM/yy") ;
     FirebaseAuth mAuth;
-
-
     //UI
     TextView _name;
     TextView _signupdate;
@@ -38,6 +39,8 @@ public class ProfileDetailFragment extends Fragment {
     TextView _email;
     TextView _phone;
     View view;
+    Button _logout;
+
 
     public ProfileDetailFragment() {
     }
@@ -51,6 +54,17 @@ public class ProfileDetailFragment extends Fragment {
         _location = view.findViewById(R.id.tv_zipcode_profile);
         _email = view.findViewById(R.id.tv_email_profile);
         _phone = view.findViewById(R.id.tv_phone_profile);
+        _logout = view.findViewById(R.id.btn_logout);
+
+        _logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAuth.signOut();
+                Intent loginIntent = new Intent(getActivity(), LoginActivity.class);
+                startActivity(loginIntent);
+                getActivity().finish();
+            }
+        });
         return view;
     }
 
@@ -76,5 +90,10 @@ public class ProfileDetailFragment extends Fragment {
                 }
             }
         });
+    }
+
+    public static ProfileDetailFragment newInstance() {
+        ProfileDetailFragment fragment = new ProfileDetailFragment();
+        return fragment;
     }
 }

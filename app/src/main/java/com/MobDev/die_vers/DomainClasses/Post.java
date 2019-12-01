@@ -11,7 +11,7 @@ public class Post {
 
     private String id;
     private String title;
-    private double price;
+    private String price;
     private Date date;
     private String description;
     private ArrayList<String> imageUrls;
@@ -23,7 +23,7 @@ public class Post {
     private String postcode;
 
 
-    public Post(String id, String title, double price, Date date, String description, ArrayList<String> imageUrls, String userId, String postcode, String category) {
+    public Post(String id, String title, String price, Date date, String description, ArrayList<String> imageUrls, String userId, String postcode, String category) {
         this.id = id;
         this.title = title;
         this.price = price;
@@ -35,7 +35,7 @@ public class Post {
         this.category = category;
     }
 
-    public Post(String post_title, double price, ArrayList<String> imageUrls) {
+    public Post(String post_title, String price, ArrayList<String> imageUrls) {
         this.title = post_title;
         this.price = price;
         this.imageUrls = imageUrls;
@@ -59,11 +59,11 @@ public class Post {
         this.title = title;
     }
 
-    public double getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 

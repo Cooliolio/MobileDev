@@ -35,57 +35,64 @@ import java.util.List;
 
 
 public class ProfileFragment extends Fragment {
-
-
     private TabLayout tabLayout;
     public ViewPager viewPager;
     public  View view;
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
 
     public ProfileFragment() {
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         this.view = inflater.inflate(R.layout.fragment_profile, container, false);
-
         viewPager = (ViewPager) view.findViewById(R.id.viewpager);
-        setupViewPager(viewPager);
-
         tabLayout = (TabLayout) view.findViewById(R.id.tabs);
+        setupViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
         return view;
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(this.getFragmentManager());
-        adapter.addFragment(new ProfileDetailFragment(), "My Profile");
-        adapter.addFragment(new ProfilePostsFragment(), "My Posts");
+        ViewPagerAdapter adapter = new ViewPagerAdapter(this.getChildFragmentManager());
         viewPager.setAdapter(adapter);
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
-        private final List<Fragment> mFragmentList = new ArrayList<>();
+
+
         private final List<String> mFragmentTitleList = new ArrayList<>();
+        private  final PostFragment pf = PostFragment.newInstance();
+
 
         public ViewPagerAdapter(FragmentManager manager) {
             super(manager);
+            mFragmentTitleList.add("Profile");
+            mFragmentTitleList.add("Posts");
         }
 
         @Override
         public Fragment getItem(int position) {
-            return mFragmentList.get(position);
+            switch (position){
+                case 0:
+                    return ProfileDetailFragment.newInstance();
+                case 1:
+                    pf.profilePosts(mAuth.getUid());
+                    return pf;
+            }
+            return  null;
         }
 
         @Override
         public int getCount() {
-            return mFragmentList.size();
-        }
-
-        public void addFragment(Fragment fragment, String title) {
-            mFragmentList.add(fragment);
-            mFragmentTitleList.add(title);
+            return 2;
         }
 
         @Override

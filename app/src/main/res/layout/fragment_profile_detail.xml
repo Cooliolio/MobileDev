@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ViewFragments.ProfileDetailFragment">
+    tools:context=".ViewFragments.ProfileDetailFragment"
+    android:background="@color/white">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -64,6 +65,11 @@
                 android:layout_height="wrap_content"
                 android:text="Email"
                 />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Afmelden"
+                android:id="@+id/btn_logout"/>
         </LinearLayout>
     </RelativeLayout>
 </FrameLayout>

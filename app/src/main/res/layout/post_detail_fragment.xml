@@ -10,87 +10,174 @@
     android:clickable="true"
     tools:context=".ViewFragments.PostDetailFragment">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/tv_detail_title"
-            style="@style/DetailTitleStyle"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="top"
-            android:background="@color/colorGreen"
-            android:gravity="end"
-            android:padding="5dp"
-            android:text="This is the title of the post" />
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
 
 
-        <com.denzcoskun.imageslider.ImageSlider
-            android:id="@+id/iv_detail_image"
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:background="@color/white"
-            android:elevation="10dp"
-            app:auto_cycle="true"
-            app:delay="0"
-            app:period="4000"
-            app:placeholder="@mipmap/ic_launcher_foreground"
-            android:layout_margin="10dp"
-        />
-
-        <android.support.v7.widget.CardView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:elevation="1000dp"
-            app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="10dp">
+            android:orientation="vertical">
 
-            <ScrollView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_detail_title"
+                style="@style/DetailTitleStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="top"
+                android:background="@color/colorGreen"
+                android:gravity="end"
+                android:padding="5dp"
+                android:text="This is the title of the post" />
+
+
+            <com.denzcoskun.imageslider.ImageSlider
+                android:id="@+id/iv_detail_image"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_margin="10dp"
+                android:background="@color/white"
+                android:elevation="10dp"
+                app:auto_cycle="true"
+                app:delay="0"
+                app:period="4000"
+                app:placeholder="@mipmap/ic_launcher_foreground" />
+
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:elevation="1000dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="2dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:padding="5dp">
-
-                    <TextView
-                        android:id="@+id/tv_detail_price"
-                        style="@style/DetailInfoStyle"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="Price_" />
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/tv_detail_location"
                         style="@style/DetailInfoStyle"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="25dp"
+
                         android:text="Location_" />
+
 
                     <TextView
                         android:id="@+id/tv_detail_date"
                         style="@style/DetailInfoStyle"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="25dp"
                         android:text="Date_" />
 
-                    <TextView
-                        android:id="@+id/tv_detail_description"
-                        style="@style/InfoStyle"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="Description_" />
+                    <ViewSwitcher
+                        android:id="@+id/vs_read_edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:id="@+id/ly_read"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:padding="5dp">
+
+
+                            <TextView
+                                android:id="@+id/tv_detail_price"
+                                style="@style/DetailInfoStyle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Price_" />
+
+                            <TextView
+                                android:id="@+id/tv_detail_description"
+                                style="@style/InfoStyle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Description_" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ly_edit"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:padding="5dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Price €" />
+
+                            <EditText
+                                android:id="@+id/et_detail_price"
+                                style="@style/DetailInfoStyle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Price_" />
+
+
+                            <EditText
+                                android:id="@+id/et_detail_description"
+                                style="@style/InfoStyle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Price_" />
+
+                            <Button
+                                android:id="@+id/btn_save_changes"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Save" />
+                        </LinearLayout>
+                    </ViewSwitcher>
                 </LinearLayout>
 
-            </ScrollView>
+            </android.support.v7.widget.CardView>
 
-        </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:elevation="1000dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="2dp">
 
-    </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:id="@+id/tv_detail_profilename"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/tv_detail_profilenumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/tv_detail_profileemmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </FrameLayout>

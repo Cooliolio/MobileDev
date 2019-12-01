@@ -89,7 +89,6 @@ public class MainActivity extends AppCompatActivity {
                     searchView.setQuery("", false);
                     searchView.setIconified(true);
                     postFragment.resetData();
-                    swapPostFragment(postFragment);
                 }
             });
             searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
