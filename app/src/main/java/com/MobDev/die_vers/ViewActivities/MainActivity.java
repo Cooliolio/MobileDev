@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.MobDev.die_vers.DomainClasses.User;
 import com.MobDev.die_vers.R;
+import com.MobDev.die_vers.ViewFragments.AddPostFragment;
 import com.MobDev.die_vers.ViewFragments.PostDetailFragment;
 import com.MobDev.die_vers.ViewFragments.PostFragment;
 import com.MobDev.die_vers.ViewFragments.ProfileFragment;
@@ -33,8 +34,10 @@ public class MainActivity extends AppCompatActivity {
     //UI ELLEMENTS
     PostFragment postFragment;
     ProfileFragment profileFragment;
+    AddPostFragment addPostFragment;
     PostDetailFragment newPostDetailFragment;
     ProfileFragment newProfileFragment;
+    AddPostFragment newAddPostFragment;
     FragmentManager fragmentManager;
     SearchView searchView;
     BottomNavigationItemView homeItem;
@@ -45,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
             fragmentManager = getSupportFragmentManager();
             postFragment = new PostFragment();
+            addPostFragment = new AddPostFragment();
             profileFragment = new ProfileFragment();
             setContentView(R.layout.activity_main);
             searchView = findViewById(R.id.search_bar);
@@ -78,6 +82,11 @@ public class MainActivity extends AppCompatActivity {
                     searchView.setQuery("", false);
                     searchView.setIconified(true);
                     swapProfileFragment(profileFragment);
+                }
+                if (item.getItemId() == R.id.bottom_action_add_post) {
+                    searchView.setQuery("", false);
+                    searchView.setIconified(true);
+                    swapAddPostFragment(addPostFragment);
                 }
                 return true;
             }
@@ -134,6 +143,19 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
+    public void swapAddPostFragment(AddPostFragment pf) {
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        if (!pf.isAdded()) {
+            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            fragmentTransaction.replace(R.id.main_container, pf);
+        }
+        if (newAddPostFragment != null) {
+            if (newAddPostFragment.isAdded()) {
+                fragmentTransaction.remove(newAddPostFragment);
+            }
+        }
+        fragmentTransaction.commit();
+    }
     public void swapDetailFragment(Bundle data) {
         newPostDetailFragment = PostDetailFragment.newInstance();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

@@ -55,6 +55,7 @@ public class PostDetailFragment extends Fragment {
     EditText et_price;
     EditText et_description;
     Button btn_save_changes;
+    Button btn_delete_post;
 
     public static PostDetailFragment newInstance() {
         return new PostDetailFragment();
@@ -82,6 +83,7 @@ public class PostDetailFragment extends Fragment {
         profilenumber = view.findViewById(R.id.tv_detail_profilenumber);
         profileemail = view.findViewById(R.id.tv_detail_profileemmail);
         btn_save_changes = view.findViewById(R.id.btn_save_changes);
+        btn_delete_post = view.findViewById(R.id.btn_delete_post);
 
         final String post_id = getArguments().getString("post_id");
         btn_save_changes.setOnClickListener(new View.OnClickListener() {
@@ -91,6 +93,13 @@ public class PostDetailFragment extends Fragment {
                   "price",et_price.getText().toString(),
                   "description", et_description.getText().toString()
                 );
+            }
+        });
+        btn_delete_post.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                db.collection("Posts").document(post_id).delete();
+                getActivity().getFragmentManager().popBackStack();
             }
         });
 

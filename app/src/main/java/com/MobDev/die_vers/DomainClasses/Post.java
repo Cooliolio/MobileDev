@@ -23,8 +23,7 @@ public class Post {
     private String postcode;
 
 
-    public Post(String id, String title, String price, Date date, String description, ArrayList<String> imageUrls, String userId, String postcode, String category) {
-        this.id = id;
+    public Post(String title, String price, Date date, String description, ArrayList<String> imageUrls, String userId, String postcode, String category) {
         this.title = title;
         this.price = price;
         this.date = date;
@@ -40,6 +39,8 @@ public class Post {
         this.price = price;
         this.imageUrls = imageUrls;
     }
+
+
     public Post() {
     }
 

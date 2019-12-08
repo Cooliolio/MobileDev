@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddPostFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ViewFragments.AddPostFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -11,26 +12,68 @@
         android:orientation="vertical">
 
         <EditText
+            android:id="@+id/et_addpost_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="title" />
 
-
         <EditText
+            android:id="@+id/et_addpost_price"
+            style="@style/DetailInfoStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="title" />
-
+            android:text="Price_" />
 
         <EditText
+            android:id="@+id/et_addpost_description"
+            style="@style/DetailInfoStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="descopsqojdln" />
+            android:text="description" />
 
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/spnr_categories"
             />
-    </LinearLayout>
 
+        <GridView
+            android:id="@+id/images_grid"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:columnWidth="100dp"
+            android:numColumns="auto_fit"
+            android:verticalSpacing="24dp"
+            android:horizontalSpacing="10dp"
+            android:stretchMode="spacingWidthUniform"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            >
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_gallery"
+                android:drawableTop="@drawable/ic_image_gallery"
+                android:text="Gallery"
+                />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_camera"
+                android:drawableTop="@drawable/ic_camera"
+                android:text="Camera"
+                />
+        </LinearLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Save Post"
+            android:id="@+id/btn_save_post" />
+    </LinearLayout>
 </FrameLayout>
