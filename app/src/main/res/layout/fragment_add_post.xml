@@ -4,32 +4,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ViewFragments.AddPostFragment">
+    tools:context=".ViewFragments.AddPostFragment"
+    android:background="@color/colorGreen">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
+
+        <TextView
+            style="@style/DetailTitleStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add a new post"
+            android:textAlignment="center"/>
 
         <EditText
             android:id="@+id/et_addpost_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="title" />
+            android:hint="Enter title" />
 
         <EditText
             android:id="@+id/et_addpost_price"
-            style="@style/DetailInfoStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Price_" />
+            android:hint="Enter price" />
 
         <EditText
             android:id="@+id/et_addpost_description"
-            style="@style/DetailInfoStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="description" />
+            android:hint="Enter description" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Categories"
+            style="@style/DetailInfoStyle"/>
 
         <Spinner
             android:layout_width="match_parent"

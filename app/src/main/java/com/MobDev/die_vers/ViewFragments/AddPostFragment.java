@@ -283,7 +283,7 @@ public class AddPostFragment extends Fragment {
                                         DocumentSnapshot document = task.getResult();
                                         if (document.exists()) {
                                             user = document.toObject(User.class);
-                                            Post post = new Post(title.getText().toString(), price.getText().toString(), new Date(), description.getText().toString(), imgs, mAuth.getUid(), user.getPostcode(), "apple");
+                                            Post post = new Post(title.getText().toString(), price.getText().toString(), new Date(), description.getText().toString(), imgs, mAuth.getUid(), user.getPostcode(), spinner.getSelectedItem().toString());
                                             db.collection("Posts").document().set(post);
                                         }
                                     }

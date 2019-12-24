@@ -10,4 +10,8 @@
     <string name="title_activity_new_post">NewPost</string>
     <string name="post_title_label">Title</string>
     <string name="post_price_label">Price</string>
+    <string name="spinner_categories">Categories</string>
+    <string name="post_detail_profilename_label">User:</string>
+    <string name="post_detail_profilephone_label">Phone (Click to dail):</string>
+    <string name="post_detail_profileemail_label">E-Mail:</string>
 </resources>

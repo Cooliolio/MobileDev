@@ -162,18 +162,33 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/post_detail_profilename_label"/>
 
                     <TextView
+                        style="@style/DetailInfoStyle"
                         android:id="@+id/tv_detail_profilename"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 
                     <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/post_detail_profilephone_label"/>
+                    <TextView
+                        style="@style/DetailInfoStyle"
                         android:id="@+id/tv_detail_profilenumber"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 
                     <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/post_detail_profileemail_label"/>
+                    <TextView
+                        style="@style/DetailInfoStyle"
                         android:id="@+id/tv_detail_profileemmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />

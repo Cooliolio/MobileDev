@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ViewFragments.ProfileDetailFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/profile_layout"
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorGreen"
+            android:elevation="4dp"
+            >
+
+            <TextView
+                android:id="@+id/tv_name_profile"
+                style="@style/DetailTitleStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="Furkan Yavuz" />
+
+            <TextView
+                android:id="@+id/tv_signupdate_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_name_profile"
+                android:layout_centerHorizontal="true"
+                android:text="(BERinGEN)"
+                android:textColor="#fff"
+                android:textSize="18sp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/profile_layout"
+            android:orientation="vertical"
+            android:padding="@dimen/fab_margin">
+
+            <TextView
+                android:id="@+id/tv_zipcode_profile"
+                style="@style/DetailInfoStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Postcode"
+                />
+
+            <TextView
+
+                android:id="@+id/tv_phone_profile"
+                style="@style/DetailInfoStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Telfoon" />
+
+            <TextView
+                android:id="@+id/tv_email_profile"
+                style="@style/DetailInfoStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email" />
+
+            <Button
+                android:id="@+id/btn_logout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:text="Afmelden" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>
