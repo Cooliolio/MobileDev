@@ -32,6 +32,7 @@ public class SignupActivity extends AppCompatActivity {
 
     EditText _nameText;
     EditText _emailText;
+    EditText _phoneText;
     EditText _passwordText;
 
     Button _signupButton;
@@ -48,6 +49,7 @@ public class SignupActivity extends AppCompatActivity {
 
         _nameText = findViewById(R.id.et_name_signup);
         _emailText = findViewById(R.id.et_mail_signup);
+        _phoneText = findViewById(R.id.et_phone_signup);
         _passwordText = findViewById(R.id.et_password_signup);
         _signupButton = findViewById(R.id.btn_signup);
         _loginLink = findViewById(R.id.tv_login_signup);
@@ -135,7 +137,7 @@ public class SignupActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
                             finish();
-                            User newUser = new User(user.getUid(),user.getEmail(), _nameText.getText().toString());
+                            User newUser = new User(user.getUid(),user.getEmail(), _nameText.getText().toString(), _phoneText.getText().toString());
                             Date currentTime = Calendar.getInstance().getTime();
 
                             newUser.setSignupdate(currentTime);

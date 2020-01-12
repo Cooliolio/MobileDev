@@ -30,7 +30,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="70dp"
-                    android:text="Furkan Yavuz" />
+                    />
 
                 <TextView
                     android:id="@+id/tv_signupdate_profile"
@@ -39,7 +39,6 @@
                     android:layout_below="@+id/tv_name_profile"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="10dp"
-                    android:text="(BERinGEN)"
                     android:textColor="#fff"
                     android:textSize="18sp" />
             </RelativeLayout>
@@ -56,7 +55,7 @@
                     style="@style/DetailInfoStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Postcode" />
+                    />
 
                 <TextView
 
@@ -64,23 +63,24 @@
                     style="@style/DetailInfoStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Telfoon" />
+                    />
 
                 <TextView
                     android:id="@+id/tv_email_profile"
                     style="@style/DetailInfoStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Email" />
+                    />
 
             </LinearLayout>
         </RelativeLayout>
     </ScrollView>
-
     <Button
         android:id="@+id/btn_logout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:layout_gravity="bottom"
+        android:background="@drawable/btn_design"
         android:text="Afmelden" />
 </FrameLayout>

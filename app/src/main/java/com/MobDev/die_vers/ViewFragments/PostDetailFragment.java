@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
 import com.MobDev.die_vers.DomainClasses.Post;
@@ -93,6 +94,7 @@ public class PostDetailFragment extends Fragment {
                   "price",et_price.getText().toString(),
                   "description", et_description.getText().toString()
                 );
+                Toast.makeText(getContext(),"Your post has been saved!",Toast.LENGTH_SHORT).show();
             }
         });
         btn_delete_post.setOnClickListener(new View.OnClickListener() {
@@ -100,6 +102,7 @@ public class PostDetailFragment extends Fragment {
             public void onClick(View v) {
                 db.collection("Posts").document(post_id).delete();
                 getActivity().getFragmentManager().popBackStack();
+                Toast.makeText(getContext(),"Your post has been deleted!",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -111,6 +114,20 @@ public class PostDetailFragment extends Fragment {
 
                 Intent i = new Intent(Intent.ACTION_DIAL, u);
                 startActivity(i);
+            }
+        });
+
+        profileemail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent email = new Intent(Intent.ACTION_SEND);
+                email.putExtra(Intent.EXTRA_EMAIL, new String[]{ profileemail.getText().toString()});
+                email.putExtra(Intent.EXTRA_SUBJECT, title.getText());
+
+                //need this to prompts email client only
+                email.setType("message/rfc822");
+
+                startActivity(Intent.createChooser(email, "Choose an Email client :"));
             }
         });
         imageList = new ArrayList<SlideModel>();
@@ -140,8 +157,8 @@ public class PostDetailFragment extends Fragment {
                         title.setText(selectedPost.getTitle());
                         price.setText("Prijs: € " + selectedPost.getPrice());
                         et_price.setText(selectedPost.getPrice());
-                        location.setText("Postcode: " + selectedPost.getPostcode());
-                        date.setText("Datum: " + df1.format(selectedPost.getDate()));
+                        location.setText("Zipcode: " + selectedPost.getPostcode());
+                        date.setText("Date: " + df1.format(selectedPost.getDate()));
                         description.setText(selectedPost.getDescription());
                         et_description.setText(selectedPost.getDescription());
 

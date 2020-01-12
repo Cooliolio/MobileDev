@@ -54,6 +54,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -118,7 +119,7 @@ public class AddPostFragment extends Fragment {
 
         spinner = view.findViewById(R.id.spnr_categories);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, categories);
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, categories);
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         spinner.setAdapter(adapter);
 
@@ -155,8 +156,6 @@ public class AddPostFragment extends Fragment {
                 uniqueID = UUID.randomUUID().toString();
                 imgs = new ArrayList<>();
                 uploadImage(uniqueID);
-                //add urls
-                //post post
             }
         });
 
@@ -172,7 +171,7 @@ public class AddPostFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent pickPhoto = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(pickPhoto, 1);//one can be replaced with any action code
+                startActivityForResult(pickPhoto, 2);//one can be replaced with any action code
             }
         });
         return view;
@@ -207,16 +206,20 @@ public class AddPostFragment extends Fragment {
                     }
                 }
                 break;
+            case 2:
+                Uri uri = data.getData();
+                try {
+                    Bitmap btm = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
+                    images.add(btm);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
         }
-        initializeGrid();
+        imageAdapter.notifyDataSetChanged();
+        image_grid.invalidate();
     }
 
-    public void initializeGrid() {
-        for (Bitmap photo : images) {//or something like this
-            ImageView image = new ImageView(getContext());
-            image.setImageBitmap(photo);
-        }
-    }
 
     class ImageAdapter extends BaseAdapter {
 
@@ -256,14 +259,14 @@ public class AddPostFragment extends Fragment {
 
     public void uploadImage(String uniqueID) {
         int counter = 0;
+        UploadTask uploadTask = null;
         for (Bitmap btmp : images) {
             postImagesRefs = storageRef.child(uniqueID + "/" + counter + ".jpg");
             counter++;
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             btmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
             byte[] data = baos.toByteArray();
-
-            UploadTask uploadTask = postImagesRefs.putBytes(data);
+            uploadTask = postImagesRefs.putBytes(data);
             uploadTask.addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception exception) {
@@ -275,25 +278,37 @@ public class AddPostFragment extends Fragment {
                         @Override
                         public void onSuccess(Uri uri) {
                             imgs.add(uri.toString());
-                            final DocumentReference docRef = db.collection("Users").document(mAuth.getUid());
-                            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                @Override
-                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                    if (task.isSuccessful()) {
-                                        DocumentSnapshot document = task.getResult();
-                                        if (document.exists()) {
-                                            user = document.toObject(User.class);
-                                            Post post = new Post(title.getText().toString(), price.getText().toString(), new Date(), description.getText().toString(), imgs, mAuth.getUid(), user.getPostcode(), spinner.getSelectedItem().toString());
-                                            db.collection("Posts").document().set(post);
+                            
+                            if(images.size() == imgs.size()){
+                                final DocumentReference docRef = db.collection("Users").document(mAuth.getUid());
+                                docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                        if (task.isSuccessful()) {
+                                            DocumentSnapshot document = task.getResult();
+                                            if (document.exists()) {
+                                                user = document.toObject(User.class);
+                                                Post post = new Post(title.getText().toString(), price.getText().toString(), new Date(), description.getText().toString(), imgs, mAuth.getUid(), user.getPostcode(), spinner.getSelectedItem().toString());
+                                                db.collection("Posts").document().set(post);
+
+                                                title.setText("");
+                                                price.setText("");
+                                                description.setText("");
+                                                images = new ArrayList<>();
+                                                imageAdapter = new ImageAdapter(images);
+                                                image_grid.setAdapter(imageAdapter);
+                                                Toast.makeText(getContext(), "Your post has been saved!", Toast.LENGTH_SHORT).show();
+                                            }
                                         }
                                     }
-                                }
-                            });
+                                });
+                            }
                         }
                     });
+
                 }
             });
         }
-    }
 
+    }
 }
